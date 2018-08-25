@@ -1,0 +1,9 @@
+C:\sandbox\json1\json1\bin\Debug\json1.exe.config
+C:\sandbox\json1\json1\bin\Debug\json1.exe
+C:\sandbox\json1\json1\bin\Debug\json1.pdb
+C:\sandbox\json1\json1\obj\Debug\json1.csprojResolveAssemblyReference.cache
+C:\sandbox\json1\json1\obj\Debug\json1.exe
+C:\sandbox\json1\json1\obj\Debug\json1.pdb
+C:\sandbox\json1\json1\bin\Debug\Microsoft.Crm.Sdk.Proxy.dll
+C:\sandbox\json1\json1\bin\Debug\Microsoft.Xrm.Sdk.dll
+C:\sandbox\json1\json1\bin\Debug\Newtonsoft.Json.dll
