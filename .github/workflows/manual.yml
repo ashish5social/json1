@@ -1,0 +1,42 @@
+name: Run Ifconfig in Docker and Save Output
+
+on:
+  workflow_dispatch: # Allows manual triggering from the GitHub Actions tab
+
+jobs:
+  run-docker:
+    runs-on: ubuntu-latest # Runs on a GitHub-hosted Ubuntu runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3 # Checks out the repo to allow committing changes
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2 # Sets up Docker Buildx for better building capabilities
+
+      - name: Run Docker Container and Save Output
+        id: run_ifconfig
+        run: |
+          # Pull the Ubuntu image from Docker Hub
+          docker pull ubuntu:latest
+          
+          # Run the Docker container, execute 'ifconfig', and save the output to a file
+          docker run --rm ubuntu:latest sh -c "
+            apt-get update && apt-get install -y net-tools; # Install net-tools to get ifconfig
+            ifconfig; # Run ifconfig command
+          " > output.txt # Save output to a file
+
+      - name: Save Output to Log File
+        run: |
+          # Generate a log file name with current date and time
+          LOG_FILE="log-$(date +'%Y%m%d%H%M%S').txt"
+          
+          # Move the output to the log file
+          mv output.txt $LOG_FILE
+          
+          # Add and commit the log file to the repository
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add $LOG_FILE
+          git commit -m "Add ifconfig output log: $LOG_FILE"
+          git push
